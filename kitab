@@ -1,0 +1,60 @@
+//mengambil potongan teks yang dimulai dari karakter keempat dst
+SELECT nama_nasabah, substring(nama_nasabah,4), mid(nama_nasabah,3) FROM
+Nasabah
+
+
+// mengambil dua karakter pertama dari nilai
+SELECT nama_nasabah, left(nama_nasabah,2), mid(nama_nasabah,3,1),
+right(nama_nasabah,2) FROM Nasabah
+
+
+//menggabungkan string
+SELECT concat('helo ',nama_nasbah) FROM nasabah
+
+
+//Jika ingin nama dengan berakhiran “a” dengan menggunakan kondisi Ya dan Tidak
+SELECT concat(nama_nasabah,' berakhiran "a" : ',
+if(right(nama_nasabah,1)='a','ya','tidak')) from nasabah
+
+
+//Untuk dapat melihat karakter yang diawal dengan “ma”
+SELECT nama_nasabah FROM nasabah where nama_nasabah regexp ‘^ba’
+
+
+//Untuk dapat melihat karakter nama yang diakhiri dengan “ya”
+SELECT nama_nasabah FROM nasabah WHERE nama_nasabah regexp 'ya$'
+
+
+//Untuk menampilkan format tanggal sesuai keinginan
+SELECT tanggal, date_format(tanggal,'%M %d,%Y') as Tanggal FROM Transaksi
+
+
+//membuat alias pada tabel
+-select tr.no_trans, tr.no_rekening, tr.nominal from transaksi tr
+-select tr.no_trans, tr.no_rekening, ns.nama_nasabah, tr.nominal from transaksi tr, nasabah ns where tr.no_rekening=ns.no_rekening
+
+
+//membuat alias pada kolom
+select no_trans as "Nomor Transaksi", tanggal as "Tanggal
+Transaksi", No_rekening as "Nomor Rekening" from transaksi;
+
+
+
+//inner join 2 tabel 
+SELECT transaksi.no_trans, transaksi.tanggal, nasabah.no_rekening, nasabah.nama_nasabah FROM transaksi INNER JOIN nasabah ON transaksi.no_rekening=nasabah.no_rekening;
+
+
+
+//inner join 3 tabel
+SELECT tr.no_trans, tr.tanggal, ns.no_rekening, ns.nama_nasabah, jt.kode_jenis , jt.jenis_transaksi FROM transaksi tr INNER JOIN nasabah ns ON tr.no_rekening = ns.no_rekening
+INNER JOIN jenis_transaksi jt ON tr.kode_jenis = jt.kode_jenis;
+
+
+//left join(isi tabel sebelah kiri akan ditampilkan semua)
+SELECT nasabah.no_rekening, nasabah.nama_nasabah,transaksi.no_trans, transaksi.tanggal
+FROM nasabah LEFT JOIN transaksi
+ON transaksi.no_rekening=nasabah.no_rekening;
+
+
+//right join(isi tabel sebelah kanan akan ditampilkan semua)
+SELECT transaksi.no_trans, transaksi.tanggal, nasabah.no_rekening,nasabah.nama_nasabah FROM transaksi RIGHT JOIN nasabah ON transaksi.no_rekening=nasabah.no_rekening;
