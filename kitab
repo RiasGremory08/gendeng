@@ -57,4 +57,38 @@ ON transaksi.no_rekening=nasabah.no_rekening;
 
 
 //right join(isi tabel sebelah kanan akan ditampilkan semua)
-SELECT transaksi.no_trans, transaksi.tanggal, nasabah.no_rekening,nasabah.nama_nasabah FROM transaksi RIGHT JOIN nasabah ON transaksi.no_rekening=nasabah.no_rekening;
+SELECT transaksi.no_trans, transaksi.tanggal, nasabah.no_rekening,nasabah.nama_nasabah FROM transaksi RIGHT JOIN nasabah ON 
+transaksi.no_rekening=nasabah.no_rekening;
+
+
+
+<-- Lathihan UTS -->
+//menghitung umur
+create view view1 as select  no_peserta, nama_peserta, tgl_lahir. year(curdate()) - (tgl_lahir) as usia from pesrta0037;
+
+
+//menambahkan string
+create view view2 as select no_peserta, (concat 'nama ' , nama_peserta) as namanya from peserta00037;
+
+
+//merubah fromat tanggal
+CREATE view view4 as SELECT nama, tgl_lahir, DATE_FORMAT(tgl_lahir,'%d %M %Y') as Format_tanggal from peserta0097
+
+
+// inner join
+CREATE view view5 as select s.no_daftar, s.seminar, p.no_peserta, p.nama from peserta0097 p join seminar0097 s on 
+p.no_peserta = s.no_peserta
+
+
+
+//join
+CREATE view view7 as select p.no_peserta, p.nama, s.no_daftar, s.seminar from peserta0097 p join seminar0097 s on 
+p.no_peserta = s.no_peserta
+
+
+
+//memecah tanggal menjadi hari,bulan,tahun
+CREATE view view6 AS SELECT s.no_daftar, p.no_peserta, DATE_FORMAT(P.tgl_lahir, '%Y') AS tahun_lahir, DATE_FORMAT(p.tgl_lahir, '%M') 
+AS bulan_lahir, DATE_FORMAT(P.tgl_lahir,'%d') AS tanggal_lahir, DATE_FORMAT(P.tgl_lahir, '%W') 
+AS hari_lahir FROM peserta0037 p JOIN seminar0037 s ON p.no_peserta = s.no_peserta;
+
